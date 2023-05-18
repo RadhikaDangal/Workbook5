@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <main>
+      <div>
+        <img src= "https://picsum.photos/id/237/200/300" />
+        <p>Cute Puppy</p>
+      </div>
+      <div>
+        <img src="https://picsum.photos/200/300" />
+        <p>Images Changes Randomly</p>
+      </div>
+      <div>
+        <img src="https://picsum.photos/seed/picsum/200/300" />
+        <p>Snowy Mountain</p>
+      </div>
+    </main>
+    <script>
+      const paragraphs = document.querySelectorAll("p");
+      for (const paragraph of paragraphs) {
+        paragraph.style.border = "1px solid black";
+        //added next two lines to improve layout, not a requirement
+        paragraph.style.marginTop = "1rem";
+        paragraph.style.padding = ".5rem";
+      }
+
+      const images = document.querySelectorAll("img");
+      images.forEach((image) => {
+        image.classList.add("roundedImg");
+        image.alt = "anime image";
+      });
+    </script>
+  </body>
+</html>
