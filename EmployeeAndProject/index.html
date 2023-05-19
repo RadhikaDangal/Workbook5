@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
+</head>
+<body>
+    <h1>Employee Data</h1>
+  <select id="employeeSelect"></select>
+  <table id="employeeTable"></table>
+
+  <script>
+    // Employee data array
+    let employees = [
+      {
+        id: "55007",
+        name: "Rarina Chambers",
+        jobTitle: "Tech Lead",
+        yearsAtCompany: 14,
+        email: "karinachambers@ziore.com",
+        whAddress: "640 Boynton Place, Faxon, Kentucky, 42071",
+        skillSet: "Velit commodo voluptate id est. Fugiat magna enim quis exercitation duis fugiat non nisi consequat.",
+        projectsAssignedTo: [
+          {
+            projectId: 112,
+            name: "Cupidatat aute"
+          }
+        ]
+      },
+      {
+        id: "23810",
+        name: "Kasey Bowers",
+        jobTitle: "Senior Programmer",
+        yearsAtCompany: 19,
+        email: "kaseybowers@ziore.com",
+        whAddress: "969 Clarendon Road, Marshall, Vermont, 47859",
+        skillSet: "Est et voluptate incididunt deserunt culpa excepteur.",
+        projectsAssignedTo: [
+          {
+            projectId: 124,
+            name: "Amet do deserunttate aliqua"
+          }
+        ]
+      }
+    ];
+
+    // Sort employees by name
+    employees.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Populate the dropdown list
+    const employeeSelect = document.getElementById('employeeSelect');
+    employees.forEach((employee) => {
+      const option = document.createElement('option');
+      option.value = employee.name;
+      option.textContent = employee.name;
+      employeeSelect.appendChild(option);
+    });
+
+    // Display employee data when selected from the dropdown
+    employeeSelect.addEventListener('change', (event) => {
+      const selectedEmployee = employees.find((employee) => employee.name === event.target.value);
+      displayEmployeeData(selectedEmployee);
+    });
+
+    // Function to display employee data in a table
+    function displayEmployeeData(employee) {
+      const employeeTable = document.getElementById('employeeTable');
+      employeeTable.innerHTML = '';
+
+      for (const key in employee) {
+        if (key === 'projectsAssignedTo') continue; // Skip displaying projectsAssignedTo
+
+        const row = employeeTable.insertRow();
+        const cell1 = row.insertCell();
+        const cell2 = row.insertCell();
+        cell1.textContent = key;
+        cell2.textContent = employee[key];
+      }
+
+      // Display projects assigned to the employee
+      const projectsRow = employeeTable.insertRow();
+      const projectsCell1 = projectsRow.insertCell();
+      const projectsCell2 = projectsRow.insertCell();
+      projectsCell1.textContent = 'Projects Assigned';
+      projectsCell2.textContent = employee.projectsAssignedTo.length;
+
+      // Display each project name in a new row
+      employee.projectsAssignedTo.forEach((project) => {
+        const projectRow = employeeTable.insertRow();
+        const projectCell = projectRow.insertCell();
+        projectCell.textContent = project.name;
+      });
+    }
+  </script>
+</body>
+</html>

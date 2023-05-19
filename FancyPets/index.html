@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fancy Pets</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1>Pets</h1>
+
+          <div id="petsContainer" class="card-columns"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let pets = [
+        {
+          name: "Rubby",
+          type: "Dog",
+          breed: "Corgi",
+          bestTrick: "Roll over",
+          image: "images/dog.jpg",
+        },
+        {
+          name: "Kitkit",
+          type: "Cat",
+          breed: "Mixed",
+          bestTrick: "Commanding his owner to feed him",
+          image: "images/cat.jpg",
+        },
+        // Add more pet objects here
+      ];
+
+      function createCard(pet) {
+        let card = document.createElement("div");
+        card.classList.add("card");
+
+        let img = document.createElement("img");
+        img.src = pet.image;
+        img.classList.add("card-img-top");
+        img.alt = pet.name;
+
+        let cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
+        let name = document.createElement("h5");
+        name.classList.add("card-title");
+        name.textContent = pet.name;
+
+        let type = document.createElement("p");
+        type.classList.add("card-text");
+        type.textContent = "Type: " + pet.type;
+
+        let breed = document.createElement("p");
+        breed.classList.add("card-text");
+        breed.textContent = "Breed: " + pet.breed;
+
+        let bestTrick = document.createElement("p");
+        bestTrick.classList.add("card-text");
+        bestTrick.textContent = "Best Trick: " + pet.bestTrick;
+
+        cardBody.appendChild(name);
+        cardBody.appendChild(type);
+        cardBody.appendChild(breed);
+        cardBody.appendChild(bestTrick);
+
+        card.appendChild(img);
+        card.appendChild(cardBody);
+
+        return card;
+      }
+
+      function displayPets() {
+        let petsContainer = document.getElementById("petsContainer");
+
+        pets.forEach((pet) => {
+          let card = createCard(pet);
+          petsContainer.appendChild(card);
+        });
+      }
+
+      displayPets();
+    </script>
+  </body>
+</html>
