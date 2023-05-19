@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Bureau</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
+</head>
+<body>
+    <h1>Tourist Bureau</h1>
+         
+    <select id="categoryDropdown"onchange="showActivities()">
+        <option value="">Select one...</option>
+        <option value="Adventures">Adventures</option>
+        <option value="Arts & Crafts">Arts & Crafts</option>
+        <option value="Local Sports">Local Sports</option>
+        <option value="Museums">Museums</option>
+        <option value="Wine Tastings">Wine Tastings</option>
+        <option value="Other">Other</option>
+    </select>
+        
+    <table id="activitiesTable"></table>
+        
+    <script>
+        "use strict"
+        let categories = [
+        "Adventures",
+        "Arts & Crafts",
+        "Local Sports",
+        "Museums",
+        "Wine Tastings",
+        "Other"
+    ];
+        
+    let activities = [
+  {
+    category: "Adventures",
+    id: "A101",
+    name: "Valley Hot Air Balloons",
+    description: "Enjoy a lovely hot air balloon ride over the valley at sunrise. Call 800-555-1212 to reserve a date/time after you complete your e-ticket purchase.",
+    location: "121 S. Main Street",
+    price: 265.00
+  },
+  {
+    category: "Arts & Crafts",
+    id: "AC201",
+    name: "Painting Workshop",
+    description: "Unleash your creativity with a guided painting workshop. No prior experience needed. All materials provided.",
+    location: "Studio 123, Art Avenue",
+    price: 30.00
+  },
+  {
+    category: "Local Sports",
+    id: "LS301",
+    name: "Community Soccer League",
+    description: "Join the local soccer league and showcase your skills. Compete with other teams in a friendly and competitive environment.",
+    location: "Community Park",
+    price: 10.00
+  },
+  {
+    category: "Museums",
+    id: "M401",
+    name: "City History Museum",
+    description: "Explore the rich history of our city through interactive exhibits and artifacts. Guided tours available.",
+    location: "45 W. Elm Avenue",
+    price: 15.00
+  },
+  {
+    category: "Wine Tastings",
+    id: "W501",
+    name: "Vineyard Estate Winery",
+    description: "Indulge in a delightful wine tasting experience amidst the picturesque vineyard. Learn about the winemaking process and savor a variety of fine wines.",
+    location: "987 Vineyard Lane",
+    price: 40.00
+  },
+  {
+    category: "Other",
+    id: "O601",
+    name: "City Sightseeing Tour",
+    description: "Explore the city's landmarks and attractions with a guided sightseeing tour. Discover hidden gems and interesting facts about the city.",
+    location: "Departs from City Center",
+    price: 20.00
+  }
+]
+        
+    function showActivities() {
+        let category = document.getElementById("categoryDropdown").value;
+        let table = document.getElementById("activitiesTable");
+        
+        // Clear the table
+        table.innerHTML = "";
+        
+        // If "Select one..." is selected, return early
+        if (category === "") return;
+        
+        // Filter activities based on selected category
+        let matchingActivities = activities.filter(activity => activity.category === category);
+        
+        if (matchingActivities.length === 0) {
+        
+        
+        let row = table.insertRow();
+        let cell = row.insertCell();
+        cell.textContent= "No activities found for this category.";
+        } else {
+        
+        // Create table header
+        let headerRow = table.insertRow();
+        let headers = ["ID", "Name", "Description", "Location", "Price"];
+        headers.forEach(headerText =>{
+         let header = document.createElement("th");
+         header.textContent = headerText;
+        headerRow.appendChild(header);
+     });
+        
+        // Add activities to the table
+        matchingActivities.forEach(activity => {
+         let row = table.insertRow();
+         let { id, name, description, location, price } = activity;
+         let rowData = [id,name, description, location, "$" + price.toFixed(2)];
+        
+            rowData.forEach(data => {
+            let cell = row.insertCell();
+            cell.textContent = data;
+         });
+      });
+    }
+ }
+        
+ </script>
+</body>
+</html>
+        
